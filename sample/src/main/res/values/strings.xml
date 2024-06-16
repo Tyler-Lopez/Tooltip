@@ -5,6 +5,8 @@
     <string name="bottom_no_auto_adjust">This tooltip has BOTTOM position. It will not auto adjust to bounds. SCALE Animation</string>
     <string name="bottom">This tooltip has BOTTOM position and no adjustments are required. SCALE Animation</string>
 
+    <string name="top_auto_adjust_padding_horizontal_only">This tooltip has TOP position and it will adjust its sides so as to stay in the bounds. It has horizontal padding with no vertical padding. NO animation</string>
+    <string name="top_auto_adjust_padding_vertical_only">This tooltip has TOP position and it will adjust its sides so as to stay in the bounds. It has vertical padding with no horizontal padding. NO animation</string>
     <string name="top_auto_adjust">This tooltip has TOP position and it will adjust its sides so as to stay in the bounds. NO animation</string>
     <string name="top_no_auto_adjust">This tooltip has TOP position. It will not auto adjust to bounds. NO animation</string>
     <string name="top">This tooltip has TOP position and no adjustments are required. NO animation</string>

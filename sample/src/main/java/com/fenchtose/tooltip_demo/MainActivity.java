@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.bottom_auto_adjust, Tooltip.BOTTOM, true,
                         TooltipAnimation.SCALE, false,
                         tooltipSize,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.bottom_no_auto_adjust, Tooltip.BOTTOM, false,
                         TooltipAnimation.SCALE, false,
                         tooltipSize,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
 
@@ -84,7 +84,25 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.bottom, Tooltip.BOTTOM, false,
                         TooltipAnimation.SCALE, true,
                         tooltipSize,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
+            }
+        });
+
+        findViewById(R.id.top_auto_adjust_padding_horizontal_only).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTooltip(v, R.string.top_auto_adjust_padding_horizontal_only, Tooltip.TOP, true,
+                        TooltipAnimation.NONE, false, tooltipSize,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 48, 0);
+            }
+        });
+
+        findViewById(R.id.top_auto_adjust_padding_vertical_only).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTooltip(v, R.string.top_auto_adjust_padding_vertical_only, Tooltip.TOP, true,
+                        TooltipAnimation.NONE, false, tooltipSize,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 48);
             }
         });
 
@@ -93,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showTooltip(v, R.string.top_auto_adjust, Tooltip.TOP, true,
                         TooltipAnimation.NONE, false, tooltipSize,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
 
@@ -102,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showTooltip(v, R.string.top_no_auto_adjust, Tooltip.TOP, false,
                         TooltipAnimation.NONE, false, tooltipSize,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
 
@@ -110,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showTooltip(v, R.string.top, Tooltip.TOP, false,TooltipAnimation.NONE, false, tooltipSize,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
 
@@ -120,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.right_auto_adjust, Tooltip.RIGHT, true,
                         TooltipAnimation.REVEAL, true,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
-                        tooltipSize);
+                        tooltipSize, 0, 0);
             }
         });
 
@@ -130,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.right_no_auto_adjust, Tooltip.RIGHT, false,
                         TooltipAnimation.REVEAL, true,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
-                        tooltipSize);
+                        tooltipSize, 0, 0);
             }
         });
 
@@ -139,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showTooltip(v, R.string.right, Tooltip.RIGHT, false,
                         TooltipAnimation.REVEAL, false,
-                        tooltipSize, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        tooltipSize, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
 
@@ -149,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.left_auto_adjust, Tooltip.LEFT, true,
                         TooltipAnimation.SCALE_AND_FADE, true,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
-                        tooltipSize);
+                        tooltipSize, 0, 0);
             }
         });
 
@@ -159,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 showTooltip(v, R.string.left_no_auto_adjust, Tooltip.LEFT, false,
                         TooltipAnimation.SCALE_AND_FADE, true,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
-                        tooltipSize);
+                        tooltipSize, 0, 0);
             }
         });
 
@@ -168,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showTooltip(v, R.string.left, Tooltip.LEFT, false,
                         TooltipAnimation.SCALE_AND_FADE, false,
-                        tooltipSize, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        tooltipSize, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
             }
         });
     }
@@ -204,24 +222,36 @@ public class MainActivity extends AppCompatActivity {
     private void showTooltip(@NonNull View anchor, @StringRes int resId,
                              @Tooltip.Position int position, boolean autoAdjust,
                              @TooltipAnimation.Type int type, boolean hideWhenAnimating,
-                             int width, int height) {
+                             int width, int height, int paddingHorizontal, int paddingVertical) {
         ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.tooltip_textview, null);
         TextView textView = (TextView) contentView.getChildAt(0);
         textView.setText(resId);
         textView.setLayoutParams(new FrameLayout.LayoutParams(width, height));
-        showTooltip(anchor, contentView, position, autoAdjust, type, hideWhenAnimating, tooltipColor);
+        showTooltip(
+                anchor,
+                contentView,
+                position,
+                autoAdjust,
+                type,
+                hideWhenAnimating,
+                tooltipColor,
+                paddingHorizontal,
+                paddingVertical
+        );
     }
 
     private void showTooltip(@NonNull View anchor, @NonNull View content,
                              @Tooltip.Position int position, boolean autoAdjust,
                              @TooltipAnimation.Type int type, boolean hideWhenAnimating,
-                             int tipColor) {
+                             int tipColor, int paddingHorizontal, int paddingVertical) {
 
         new Tooltip.Builder(this)
                 .anchor(anchor, position)
                 .animate(new TooltipAnimation(type, 500, hideWhenAnimating))
                 .autoAdjust(autoAdjust)
                 .content(content)
+                .withPaddingHorizontal(paddingHorizontal)
+                .withPaddingVertical(paddingVertical)
                 .withTip(new Tooltip.Tip(tipSizeRegular, tipSizeRegular, tipColor))
                 .into(root)
                 .debug(true)

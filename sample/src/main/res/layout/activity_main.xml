@@ -29,6 +29,22 @@
 
     <ImageView
         android:layout_alignParentBottom="true"
+        android:id="@+id/top_auto_adjust_padding_horizontal_only"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/top_auto_adjust_padding_vertical_only"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <ImageView
+        android:layout_alignParentBottom="true"
         android:id="@+id/top_auto_adjust"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -52,7 +52,8 @@ public class Tooltip extends ViewGroup {
     private boolean isCancelable = true;
     private boolean autoAdjust = true;
 
-    private int padding;
+    private int paddingHorizontal;
+    private int paddingVertical;
 
     private Listener builderListener;
     private Listener listener;
@@ -112,7 +113,8 @@ public class Tooltip extends ViewGroup {
 
         this.autoAdjust = builder.autoAdjust;
         this.position = builder.position;
-        this.padding = builder.padding;
+        this.paddingHorizontal = builder.paddingHorizontal;
+        this.paddingVertical = builder.paddingVertical;
         this.checkForPreDraw = builder.checkForPreDraw;
         this.debug = builder.debug;
 
@@ -253,7 +255,7 @@ public class Tooltip extends ViewGroup {
 
                 int diff = (anchorView.getHeight() - h) / 2;
                 // We should pad right side
-                left -= (w + padding + (showTip ? tip.getHeight() : 0));
+                left -= (w + paddingHorizontal + (showTip ? tip.getHeight() : 0));
                 // Top and bottom padding is not required
                 top += diff;
 
@@ -274,7 +276,7 @@ public class Tooltip extends ViewGroup {
                 // align with horizontal axis
                 int diff = (anchorView.getHeight() - h) / 2;
                 // We should pad left side
-                left += (anchorView.getWidth() + padding + (showTip ? tip.getHeight() : 0));
+                left += (anchorView.getWidth() + paddingHorizontal + (showTip ? tip.getHeight() : 0));
                 // Top and bottom padding is not required
                 top += diff;
 
@@ -299,7 +301,7 @@ public class Tooltip extends ViewGroup {
                 left += diff;
 
                 // We should only pad bottom
-                top -= (h + padding + (showTip ? tip.getHeight() : 0));
+                top -= (h + paddingVertical + (showTip ? tip.getHeight() : 0));
 
                 if (showTip) {
                     px = left + w / 2;
@@ -322,7 +324,7 @@ public class Tooltip extends ViewGroup {
                 left += diff;
 
                 // We should only pad top
-                top += anchorView.getHeight() + padding + (showTip ? tip.getHeight() : 0);
+                top += anchorView.getHeight() + paddingVertical + (showTip ? tip.getHeight() : 0);
 
                 if (debug) {
                     Log.d(TAG, "tip top: " + top);
@@ -350,11 +352,11 @@ public class Tooltip extends ViewGroup {
                     if (left + w > r) {
                         // View is going out on the right side
                         // Add padding to the right
-                        left = r - w - padding;
+                        left = r - w - paddingHorizontal;
                     } else if (left < l) {
                         // View is going out on the left side
                         // Add padding to the left
-                        left = l + padding;
+                        left = l + paddingHorizontal;
                     }
                     break;
 
@@ -363,11 +365,11 @@ public class Tooltip extends ViewGroup {
                     if (top + h > b) {
                         // View is going out on the bottom side
                         // Add padding to bottom
-                        top = b - h - padding;
+                        top = b - h - paddingVertical;
                     } else if (top < t) {
                         // View is going out on the top side
                         // Add padding to top
-                        top = t + padding;
+                        top = t + paddingVertical;
                     }
                     break;
             }
@@ -702,10 +704,9 @@ public class Tooltip extends ViewGroup {
          */
         private Tip tip;
 
-        /**
-         * Margin from the anchor and screen boundaries
-         */
-        private int padding = 0;
+        private int paddingHorizontal = 0;
+
+        private int paddingVertical = 0;
 
         /**
          * If you want the tooltip to dismiss automatically after a certain amount of time,
@@ -840,7 +841,18 @@ public class Tooltip extends ViewGroup {
          * @return Builder
          */
         public Builder withPadding(int padding) {
-            this.padding = padding;
+            this.paddingHorizontal = padding;
+            this.paddingVertical = padding;
+            return this;
+        }
+
+        public Builder withPaddingHorizontal(int paddingHorizontal) {
+            this.paddingHorizontal = paddingHorizontal;
+            return this;
+        }
+
+        public Builder withPaddingVertical(int paddingVertical) {
+            this.paddingVertical = paddingVertical;
             return this;
         }
 
