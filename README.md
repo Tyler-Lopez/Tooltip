@@ -24,28 +24,6 @@ That's it. It's that simple. You can customize the size and color of the tip to 
 
 ## How To Install
 
-### JCenter / Bintray (Deprecated)
-
-##### Maven
-
-    repositories {
-        maven {
-            url  "http://dl.bintray.com/jayrambhia/maven"
-        }
-    }
-
-##### JCenter
-
-    repositories {
-        jcenter()
-    }
-
-##### Dependency
-
-    dependencies {
-        implementation 'com.fenchtose:tooltip:0.1.6'
-    }
-
 ### JitPack
 
     repositories {
@@ -55,7 +33,7 @@ That's it. It's that simple. You can customize the size and color of the tip to 
     }
     
     dependencies {
-        implementation 'com.github.jayrambhia:Tooltip:0.1.7-1'
+        implementation 'com.github.Tyler-Lopez:Tooltip:1.0.0'
     }
 
 ### Useful Methods:
